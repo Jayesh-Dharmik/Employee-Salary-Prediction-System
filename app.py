@@ -2,10 +2,17 @@ import streamlit as st
 import pickle
 import pandas as pd
 
+# def load_data():
+#     with open("Salary_prediction.pkl","rb") as file:
+#         return pickle.load(file)
 def load_data():
-    with open("Salary_prediction.pkl","rb") as file:
-        return pickle.load(file)
-    
+    try:
+        with open("Salary_prediction.pkl", "rb") as file:
+            return pickle.load(file)
+    except Exception as e:
+        st.error(f"Pickle loading error: {e}")
+        raise 
+        
 data = load_data()
 model = data["model"]
 encoder = data["encode"]
